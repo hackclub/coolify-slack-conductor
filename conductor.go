@@ -8,7 +8,6 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"regexp"
 )
 
 type DebugTransport struct{}
@@ -20,65 +19,6 @@ func (DebugTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	}
 	fmt.Println(string(b))
 	return http.DefaultTransport.RoundTrip(r)
-}
-
-type Destination struct {
-	url    string
-	regexp string
-}
-
-func (dest Destination) Matches(body string) bool {
-	match, _ := regexp.MatchString(dest.regexp, body)
-	return match
-}
-
-func destinations(body string) []Destination {
-	config := []Destination{
-		{
-			url:    "https://webhook.site/a32c93b6-747e-4f29-8b2c-df6eb59b6fb2?afm",
-			regexp: "\\*\\*Project:\\*\\* gary@mfa\\\\n",
-		},
-		{
-			url:    "https://webhook.site/a32c93b6-747e-4f29-8b2c-df6eb59b6fb2?danlog",
-			regexp: "goland",
-		},
-	}
-
-	var results []Destination
-	for _, dest := range config {
-		if dest.Matches(body) {
-			results = append(results, dest)
-		}
-	}
-	return results
-}
-
-func setRequestPath(req *http.Request, target *url.URL) {
-	// Set URL. Inspired by ProxyRequest.SetURL
-	targetQuery := target.RawQuery
-	req.URL.Scheme = target.Scheme
-	req.URL.Host = target.Host
-	// ProxyRequest.SetURL joins Path and RawPath, but i don't
-	req.URL.Path = target.Path
-	req.URL.RawPath = target.RawPath
-	if targetQuery == "" || req.URL.RawQuery == "" {
-		req.URL.RawQuery = targetQuery + req.URL.RawQuery
-	} else {
-		req.URL.RawQuery = targetQuery + "&" + req.URL.RawQuery
-	}
-	req.Host = ""
-}
-
-func mirrorRequest(req http.Request, destUrl string) {
-	target, _ := url.Parse(destUrl)
-	setRequestPath(&req, target)
-
-	req.RequestURI = "" // Can not be set for client requests
-
-	_, err := http.DefaultClient.Do(&req)
-	if err != nil {
-		log.Fatalln(err)
-	}
 }
 
 func main() {
@@ -108,7 +48,7 @@ func main() {
 		}
 
 		// Always send to main destination
-		destUrl, _ := url.Parse("https://webhook.site/a32c93b6-747e-4f29-8b2c-df6eb59b6fb2")
+		destUrl, _ := url.Parse(MainDestination.url)
 		log.Println("Sending to main:", destUrl.String())
 		req.SetURL(destUrl)
 	}
