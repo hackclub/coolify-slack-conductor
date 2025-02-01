@@ -1,5 +1,5 @@
 destinations:
-  - name: HCB_ENGR_NOTIFS
+  - name: HCB_ENGR_NOTIFS # This means the env var should be WEBHOOK_HCB_ENGR_NOTIFS_URL
     regex:
-      - \*\*Project:\*\* gary@[^\\n]+\\n # all projects owned by Gary
+      - \*\*Project:\*\* gary@.+\\n # all projects owned by Gary
       - \*\*Project:\*\* ian@bank-shields\\n
