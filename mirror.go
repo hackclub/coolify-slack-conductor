@@ -30,6 +30,6 @@ func mirrorRequest(req http.Request, destUrl string) {
 
 	_, err := http.DefaultClient.Do(&req)
 	if err != nil {
-		log.Fatalln(err)
+		log.Println(err)
 	}
 }

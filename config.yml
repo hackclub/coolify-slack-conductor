@@ -1,0 +1,6 @@
+destinations:
+  - name: HCB_ENGR_NOTIFS
+    regex:
+      - \*\*Project:\*\* gary@mfa\\n
+      - \*\*Project:\*\* gary@g-verify\\n
+      - \*\*Project:\*\* ian@bank-shields\\n

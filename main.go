@@ -23,6 +23,8 @@ func (DebugTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 
 func main() {
 	fmt.Println("Starting")
+	loadDestinations()
+
 	rewrite := func(req *httputil.ProxyRequest) {
 		// Read body
 		body, _ := io.ReadAll(req.In.Body)
