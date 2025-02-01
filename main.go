@@ -58,5 +58,5 @@ func main() {
 	proxy := &httputil.ReverseProxy{Rewrite: rewrite}
 	proxy.Transport = DebugTransport{}
 
-	log.Fatalln(http.ListenAndServe(":80", proxy))
+	log.Fatalln(http.ListenAndServe(":8080", proxy))
 }
