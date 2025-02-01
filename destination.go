@@ -75,5 +75,6 @@ func destinations(body string) []Destination {
 			results = append(results, dest)
 		}
 	}
+	log.Println("Destinations:", results)
 	return results
 }

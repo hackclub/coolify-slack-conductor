@@ -88,6 +88,8 @@ example of one of those payloads:
 }
 ```
 
+but without the nice formatting (no new lines or indentation).
+
 ## Configuring Destinations
 
 To begin, configurations are located in the [`config.yml`](config.yml) file.
@@ -175,7 +177,7 @@ _via Docker on Coolify._
 Set the following environment variables:
 
 - `AUTH_KEY`: any string. This "secures" this reverse proxy and prevents people from spamming our channels
-- `WEBHOOK_MAIN_URL`: the Slack webhook url of the main channel. See the [Main channel](#Main-channel) section above.
+- `WEBHOOK_MAIN_URL`: the Slack webhook url of the main channel. See the [Main channel](#main-channel) section above.
 
 ### Setting up Coolify for Slack notification
 
