@@ -22,10 +22,7 @@ func (DebugTransport) RoundTrip(r *http.Request) (*http.Response, error) {
 	return http.DefaultTransport.RoundTrip(r)
 }
 
-func main() {
-	fmt.Println("Starting")
-	loadDestinations()
-
+func reverseproxy() *httputil.ReverseProxy {
 	rewrite := func(req *httputil.ProxyRequest) {
 		// Read body
 		body, _ := io.ReadAll(req.In.Body)
@@ -59,11 +56,25 @@ func main() {
 	proxy := &httputil.ReverseProxy{Rewrite: rewrite}
 	proxy.Transport = DebugTransport{}
 
-	authKey := os.Getenv("AUTH_KEY")
+	return proxy
+}
+
+var authKey = os.Getenv("AUTH_KEY")
+
+func main() {
+	log.Println("Starting")
+
+	// Load configurations & validate
+	loadDestinations()
 	if authKey == "" {
 		log.Fatalln("Missing AUTH_KEY environment variable")
 	}
+
+	proxy := reverseproxy()
+
+	// Http server
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		// Redirect GET root to github repo
 		if req.Method == "GET" && req.RequestURI == "/" {
 			http.Redirect(w, req, "https://github.com/hackclub/coolify-slack-conductor", 302)
 			return
@@ -76,6 +87,7 @@ func main() {
 			return
 		}
 
+		// Pass request to the reverse proxy
 		proxy.ServeHTTP(w, req)
 	})
 
