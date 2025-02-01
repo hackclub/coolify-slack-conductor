@@ -3,3 +3,6 @@ destinations:
     regex:
       - \*\*Project:\*\* gary@.+\\n # all projects owned by Gary
       - \*\*Project:\*\* ian@bank-shields\\n
+  - name: HACKATHONS_DEV
+    regex:
+      - \*\*Project:\*\* mha@hackathons\\n
