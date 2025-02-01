@@ -9,7 +9,6 @@ import (
 	"net/http/httputil"
 	"net/url"
 	"os"
-	"runtime/debug"
 )
 
 type DebugTransport struct{}
@@ -64,12 +63,6 @@ var authKey = os.Getenv("AUTH_KEY")
 
 func main() {
 	log.Println("Starting")
-
-	defer func() {
-		if r := recover(); r != nil {
-			fmt.Println("stacktrace from panic: \n" + string(debug.Stack()))
-		}
-	}()
 
 	// Load configurations & validate
 	loadDestinations()
