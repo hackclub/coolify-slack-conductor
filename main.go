@@ -50,7 +50,7 @@ func reverseproxy() *httputil.ReverseProxy {
 		// Always send to main destination
 		destUrl, _ := url.Parse(MainDestination.url)
 		log.Println("Sending to main:", destUrl.String())
-		req.SetURL(destUrl)
+		setRequestPath(req.Out, destUrl)
 	}
 
 	proxy := &httputil.ReverseProxy{Rewrite: rewrite}
