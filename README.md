@@ -1,4 +1,4 @@
-# Coolify Slack Conducto
+# Coolify Slack Conductor
 
 Coolify supports sending notifications to Slack. However, it sends all notifications to a single Slack channel. This
 means that all app's deployment notifications end up in one noisy channel rather than each project's respective

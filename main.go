@@ -64,8 +64,13 @@ func main() {
 		log.Fatalln("Missing AUTH_KEY environment variable")
 	}
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+		if req.Method == "GET" && req.RequestURI == "/" {
+			http.Redirect(w, req, "https://github.com/hackclub/coolify-slack-conductor", 302)
+			return
+		}
+
 		// Having authentication here prevents ppl from spamming our slack channels
-		if req.URL.Query()["key"][0] != authKey {
+		if len(req.URL.Query()["key"]) == 0 || req.URL.Query()["key"][0] != authKey {
 			http.Error(w, "Bad Request", http.StatusBadRequest)
 			log.Println("Invalid authentication:", req.RequestURI)
 			return
