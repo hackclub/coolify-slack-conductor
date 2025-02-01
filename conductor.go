@@ -27,11 +27,16 @@ type Destination struct {
 	regexp string
 }
 
+func (dest Destination) Matches(body string) bool {
+	match, _ := regexp.MatchString(dest.regexp, body)
+	return match
+}
+
 func destinations(body string) []Destination {
 	config := []Destination{
 		{
 			url:    "https://webhook.site/a32c93b6-747e-4f29-8b2c-df6eb59b6fb2?afm",
-			regexp: "mfa",
+			regexp: "\\*\\*Project:\\*\\* gary@mfa\\\\n",
 		},
 		{
 			url:    "https://webhook.site/a32c93b6-747e-4f29-8b2c-df6eb59b6fb2?danlog",
@@ -41,8 +46,7 @@ func destinations(body string) []Destination {
 
 	var results []Destination
 	for _, dest := range config {
-		match, _ := regexp.MatchString(dest.regexp, body)
-		if match {
+		if dest.Matches(body) {
 			results = append(results, dest)
 		}
 	}
