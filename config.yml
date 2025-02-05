@@ -8,7 +8,7 @@ destinations:
       - \*\*Project:\*\* mha@hackathons\\n
   - name: COOLIFY_ALERTS # Important alerts about the server's well-being
     regex:
-      - '"Resource stopped"'
+      - '"Resource stopped"' # When a resource unexpectedly stops
       - '"Database backup failed"'
       - '"Server (unreachable|revived|disabled|enabled)"'
       - '"High disk usage detected"'
