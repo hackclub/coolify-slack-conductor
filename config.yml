@@ -6,7 +6,7 @@ destinations:
   - name: HACKATHONS_DEV
     regex:
       - \*\*Project:\*\* mha@hackathons\\n
-      - hackathons-postgres
+      - Database backup failed.*hackathons-postgres
   - name: COOLIFY_ALERTS # Important alerts about the server's well-being
     regex:
       - '"Resource stopped"' # When a resource unexpectedly stops
