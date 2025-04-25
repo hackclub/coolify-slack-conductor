@@ -13,4 +13,9 @@ destinations:
       - '"Database backup failed"'
       - '"Server (unreachable|revived|disabled|enabled)"'
       - '"High disk usage detected"'
+  - name: SHIPWRECKED
+    regex:
+      - \*\*Project:\*\* graham@shipwrecked\\n
+      - \*\*Project:\*\* dev@shipwrecked-redirect\\n
+      - \*\*Project:\*\* dev@shipwrecked-profile-generator\\n
 
