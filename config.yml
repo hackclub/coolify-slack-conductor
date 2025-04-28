@@ -15,7 +15,7 @@ destinations:
       - '"High disk usage detected"'
   - name: SHIPWRECKED
     regex:
-      - \*\*Project:\*\* graham@shipwrecked\\n
-      - \*\*Project:\*\* dev@shipwrecked-redirect\\n
-      - \*\*Project:\*\* dev@shipwrecked-profile-generator\\n
+      - graham@shipwrecked
+      - dev@shipwrecked-redirect
+      - dev@shipwrecked-profile-generator
 
