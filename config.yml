@@ -18,4 +18,6 @@ destinations:
       - graham@shipwrecked
       - dev@shipwrecked-redirect
       - dev@shipwrecked-profile-generator
-
+  - name: BLUEPRINT
+    regex:
+      - samliu-clay\/blueprint
