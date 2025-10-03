@@ -18,6 +18,10 @@ destinations:
       - graham@shipwrecked
       - dev@shipwrecked-redirect
       - dev@shipwrecked-profile-generator
+  - name: MOONSHOT
+    regex:
+      - graham/moonshot
+      - mohamad/moonshot-redirect
   - name: BLUEPRINT
     regex:
       - samliu-clay\/blueprint
