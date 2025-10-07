@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"gopkg.in/yaml.v3"
 	"log"
 	"os"
 	"regexp"
+
+	"gopkg.in/yaml.v3"
 )
 
 type ConfigItem struct {
@@ -50,6 +51,10 @@ func loadDestinations() {
 		panic(err)
 	}
 	fmt.Printf("loaded config:\n%v\n\n", LoadedConfig)
+	for _, item := range LoadedConfig.Destinations {
+		envVar := fmt.Sprintf("WEBHOOK_%s_URL", item.Name)
+		fmt.Printf("Configuration webhook urls", envVar)
+	}
 
 	// Convert config into destinations
 	for _, item := range LoadedConfig.Destinations {
