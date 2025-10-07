@@ -20,8 +20,7 @@ destinations:
       - dev@shipwrecked-profile-generator
   - name: MOONSHOT
     regex:
-      - graham\/moonshot
-      - mohamad\/moonshot-redirect
+      - \n*Project:* graham\/moonshot\n
   - name: BLUEPRINT
     regex:
       - samliu-clay\/blueprint
