@@ -53,7 +53,8 @@ func loadDestinations() {
 	fmt.Printf("loaded config:\n%v\n\n", LoadedConfig)
 	for _, item := range LoadedConfig.Destinations {
 		envVar := fmt.Sprintf("WEBHOOK_%s_URL", item.Name)
-		fmt.Printf("Configuration webhook urls", envVar)
+		fmt.Printf("Configuration webhook urls %s -> %s", envVar, os.Getenv(envVar))
+		fmt.Printf("")
 	}
 
 	// Convert config into destinations
