@@ -24,3 +24,6 @@ destinations:
   - name: BLUEPRINT
     regex:
       - samliu-clay\/blueprint
+  - name: STASIS
+    regex:
+      - alexp\/stasis
